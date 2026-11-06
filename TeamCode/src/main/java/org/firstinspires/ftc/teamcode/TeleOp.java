@@ -68,7 +68,7 @@ public class TeleOp extends OpMode
     private int liftDown = -10;
     private int liftup = 10;
 
-    private double driveslow = .7;
+    private double driveslow = .75;
 
     enum Liftstate {
         IDLE, UP, DOWN, INCREMENTUP, INCREMENTDOWN, RESET
@@ -186,7 +186,7 @@ public class TeleOp extends OpMode
             robot.getBalltofly().setPosition(0.8);
         }
         else {
-            robot.getBalltofly().setPosition(0.3);
+            robot.getBalltofly().setPosition(0.4);
         }
 
         if (gamepad2.dpad_up) {
