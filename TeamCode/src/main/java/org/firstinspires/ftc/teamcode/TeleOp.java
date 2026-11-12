@@ -63,6 +63,8 @@ public class TeleOp extends OpMode
     private boolean toggle4 = false;
     private boolean toggle5 = false;
     private boolean toggle6 = false;
+    private boolean toggle7 = false;
+    private boolean toggle8 = false;
     private boolean gate = false;
     private int liftPos = 0;
     private int liftDown = -10;
@@ -144,9 +146,17 @@ public class TeleOp extends OpMode
         // POV Mode uses left stick to go forward, and right stick to turn.
 
         double flyWheelstick = gamepad2.right_trigger;
-        robot.getFlywheel().setPower(0.65 * Range.clip(flyWheelstick,-1.0,1.0)); // * Range.clip(flyWheelstick,-1.0,1.0)
+        robot.getFlywheel().setPower(0.8 * Range.clip(-flyWheelstick,-1.0,1.0)); // * Range.clip(flyWheelstick,-1.0,1.0)
         double intakestick = -gamepad2.left_trigger;
-        robot.getInTake().setPower(Range.clip(intakestick,-1.0,1.0));
+
+
+        if (gamepad2.right_bumper) {
+            robot.getInTake().setPower(1);
+        }
+        else {
+            robot.getInTake().setPower(Range.clip(intakestick,-1.0,1.0));
+        }
+
 
         robot.getLift().setPower(.5);
 
