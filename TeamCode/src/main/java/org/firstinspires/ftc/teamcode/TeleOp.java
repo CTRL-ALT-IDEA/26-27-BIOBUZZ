@@ -63,14 +63,12 @@ public class TeleOp extends OpMode
     private boolean toggle4 = false;
     private boolean toggle5 = false;
     private boolean toggle6 = false;
-    private boolean toggle7 = false;
-    private boolean toggle8 = false;
     private boolean gate = false;
     private int liftPos = 0;
     private int liftDown = -10;
     private int liftup = 10;
 
-    private double driveslow = .75;
+    private double driveslow = .9;
 
     enum Liftstate {
         IDLE, UP, DOWN, INCREMENTUP, INCREMENTDOWN, RESET
@@ -157,6 +155,12 @@ public class TeleOp extends OpMode
             robot.getInTake().setPower(Range.clip(intakestick,-1.0,1.0));
         }
 
+        if (Math.abs(robot.getLift().getCurrentPosition() -robot.getLift().getTargetPosition())<15) {
+            robot.getLift().setPower(.01);
+        }
+        else {
+            robot.getLift().setPower(.5);
+        }
 
         robot.getLift().setPower(.5);
 
