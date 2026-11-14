@@ -60,7 +60,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Robot: Auto Drive By Encoder", group="Robot")
+@Autonomous(name="Auto", group="Robot")
 
 public class Auto1 extends LinearOpMode {
 
@@ -98,6 +98,7 @@ public class Auto1 extends LinearOpMode {
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
         robot.setMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.setMotorMode((DcMotor.RunMode.RUN_USING_ENCODER));
+        robot.getFlywheel().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         // Send telemetry message to indicate successful Encoder reset
 
         // Wait for the game to start (driver presses START)
@@ -105,7 +106,12 @@ public class Auto1 extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        robot.setAutoStraightMode(6,0.5);
+        robot.setAutoStraightMode(11,0.4);
+        shoot();
+        robot.setAutoStrafe(40,0.3);
+        robot.setAutoStraightMode(70,0.5);
+        robot.setAutoStrafe( 16,0.3);
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -120,6 +126,22 @@ public class Auto1 extends LinearOpMode {
      *  2) Move runs out of time
      *  3) Driver stops the OpMode running.
      */
+
+    public void shoot(){
+        robot.getFlywheel().setPower(-0.8);
+        sleep(2000);
+        robot.getBalltofly().setPosition(0.7);
+        sleep(1000);
+        robot.getBalltofly().setPosition(.4);
+        //change pos here
+        robot.getPollenbar().setPosition(-1);
+        sleep(2000);
+        robot.getBalltofly().setPosition(.7);
+        sleep(2000);
+        robot.getFlywheel().setPower(0);
+        robot.getBalltofly().setPosition(0.4);
+        robot.getPollenbar().setPosition(0.1);
+    }
 
     }
 

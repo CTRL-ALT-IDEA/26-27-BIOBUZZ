@@ -19,7 +19,7 @@ public class Robot {
     //this is a useful comment
 
     static final double COUNTS_PER_MOTOR_REV = 537.7;    // eg: TETRIX Motor Encoder
-    static final double DRIVE_GEAR_REDUCTION = 1.0;     // No External Gearing.
+    static final double DRIVE_GEAR_REDUCTION = -1.0;     // No External Gearing.
     static final double WHEEL_DIAMETER_INCHES = 4.09449;     // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * Math.PI);
@@ -142,7 +142,18 @@ public class Robot {
         setPowerDrive(0);
     }
 
-    public void setAutoTurnMode(int d1, double p) {
+    public void setAutoTurn(int d1, double p) {
+        setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        setDrivePosition((int) (d1 * COUNTS_PER_INCH));
+        setDriveMode(DcMotor.RunMode.RUN_TO_POSITION);
+        setPowerDrive(p);
+        while (bLDrive.isBusy() && bRDrive.isBusy() && fLDrive.isBusy() && fRDrive.isBusy()) {
+            int i = 1;
+        }
+        setPowerDrive(0);
+    }
+
+    public void setAutoStrafe(int d1, double p) {
         setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setDrivePosition((int) (d1 * COUNTS_PER_INCH), (int)(-d1 * COUNTS_PER_INCH),(int)(d1 * COUNTS_PER_INCH),(int)(-d1 * COUNTS_PER_INCH));
         setDriveMode(DcMotor.RunMode.RUN_TO_POSITION);

@@ -197,7 +197,7 @@ public class TeleOp extends OpMode
         }
 
         if (gamepad2.left_bumper) {
-            robot.getBalltofly().setPosition(0.8);
+            robot.getBalltofly().setPosition(0.7); //may need to change
         }
         else {
             robot.getBalltofly().setPosition(0.4);
@@ -219,12 +219,7 @@ public class TeleOp extends OpMode
         else {
             robot.getPollenbar().setPosition(0.1);
         }
-        if (gamepad2.x) {
-            robot.getBallreleasing().setPosition(-1);
-        }
-        else {
-            robot.getBallreleasing().setPosition(0);
-        }
+
 
 
         switch (status) {
@@ -286,7 +281,7 @@ public class TeleOp extends OpMode
         }
 
         if (toggle5) {
-            robot.getBallreleasing().setPosition(1);
+            robot.getBallreleasing().setPosition(0.25);
         }
         else {
             robot.getBallreleasing().setPosition(0);
